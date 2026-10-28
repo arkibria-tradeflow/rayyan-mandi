@@ -1,0 +1,39 @@
+
+/* Extra menu catalog — extends the existing Rayyan mobile visual system */
+.rayyan-menu-additions{margin-top:32px;padding-top:4px}
+.rayyan-kicker{font-size:9px;font-weight:800;letter-spacing:2.3px;color:#a9844c;text-transform:uppercase}
+.rayyan-catalog-intro{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0 18px}
+.rayyan-catalog-intro h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.7px;line-height:1.07;font-size:30px;color:#392a20;margin:0 0 6px}
+.rayyan-catalog-intro p{font-size:11px;color:#8e8071;line-height:1.55;margin:0}
+.rayyan-menu-count{border:1px solid #dcccba;background:#f2e8d8;border-radius:12px;min-width:62px;padding:10px 8px;color:#76502f;text-align:center;font:500 23px Georgia,serif}
+.rayyan-menu-count small{font:800 8px Arial,sans-serif;letter-spacing:1px;display:block;padding-top:4px}
+.rayyan-group{margin:0 0 23px}
+.rayyan-group-head{display:flex;justify-content:space-between;align-items:end;gap:8px;margin:0 0 10px}
+.rayyan-group-head h3{font:500 22px Georgia,"Times New Roman",serif;color:#392a20;letter-spacing:-.5px;margin:0}
+.rayyan-group-head small{font-size:10px;color:#a3907b;white-space:nowrap}
+.rayyan-menu-grid{display:grid;gap:9px}
+.rayyan-menu-card{display:flex;align-items:center;gap:11px;min-height:92px;background:#fffdf9;border:1px solid #e7dccf;border-radius:14px;padding:10px}
+.rayyan-menu-illustration{width:64px;height:67px;flex:none;border-radius:10px;background:linear-gradient(135deg,#f8f1e5,#ebdac0);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#a77b40;position:relative;overflow:hidden}
+.rayyan-menu-illustration:before{content:"";position:absolute;inset:9px;border:1px solid #cfb591;border-radius:50%}
+.rayyan-menu-illustration strong{font:400 26px Georgia,serif;line-height:1;z-index:1}
+.rayyan-menu-illustration small{font-size:7px;letter-spacing:1.1px;font-weight:800;z-index:1}
+.rayyan-menu-text{flex:1;min-width:0;cursor:pointer}
+.rayyan-menu-text h4{margin:0 0 4px;color:#3b2a20;font:600 16px/1.15 Georgia,serif}
+.rayyan-menu-text .rayyan-ar{display:block;color:#ad8c69;font-size:10px}
+.rayyan-menu-text p{font-size:10px;line-height:1.45;color:#918272;margin:5px 0 0}
+.rayyan-menu-meta{flex:none;display:flex;flex-direction:column;align-items:end;gap:10px}
+.rayyan-menu-price{color:#483427;font-size:12px;font-weight:800;white-space:nowrap}
+.rayyan-menu-price small{font-size:9px;color:#997849}
+.rayyan-menu-add{background:#35261d;color:#f6e4c3;border:0;border-radius:9px;width:33px;height:33px;display:grid;place-items:center;font-size:19px;cursor:pointer}
+.rayyan-menu-add:active{transform:scale(.94)}
+.rayyan-menu-disclosure{display:flex;gap:10px;margin:20px 0 8px;padding:13px;background:#f2e9dd;border:1px solid #dfd1bf;border-radius:12px}
+.rayyan-menu-disclosure span{color:#ad8959;font-size:20px;line-height:1}
+.rayyan-menu-disclosure p{font-size:10px;color:#776859;line-height:1.6;margin:0}
+.rayyan-menu-disclosure a{color:#695039;text-decoration:underline}
+.rayyan-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
+.rayyan-actions a{border:1px solid #d4c3a8;border-radius:11px;display:flex;align-items:center;justify-content:center;gap:6px;background:#fffcf8;text-decoration:none;color:#56402b;font-size:11px;font-weight:700;padding:13px 8px;min-height:45px}
+.rayyan-actions a:first-child{background:#3b281f;color:#f7e8d0;border-color:#3b281f}
+.rayyan-menu-additions [hidden],.rayyan-menu-card.hidden,.rayyan-group.hidden{display:none!important}
+html[dir="rtl"] .rayyan-menu-meta{align-items:start}
+html[dir="rtl"] .rayyan-menu-card{direction:rtl}
+@media(min-width:700px){.rayyan-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rayyan-menu-card{min-width:0}}
