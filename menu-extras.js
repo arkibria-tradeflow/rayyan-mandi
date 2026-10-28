@@ -125,4 +125,6 @@
   if(found){selected=found;document.getElementById("selectedBranch").textContent=found.name;document.getElementById("cartBranch").textContent=found.name;}
  }catch(e){}
  setLanguage(lang);refreshPrices();
+ const category=new URLSearchParams(window.location.search).get('category');
+ if(category){const button=Array.from(filters.querySelectorAll('button')).find(b=>b.dataset.filter===category);if(button)button.click();}
 })();
