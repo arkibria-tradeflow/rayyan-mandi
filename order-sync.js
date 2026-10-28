@@ -29,8 +29,13 @@ if(isMenu){
   });
  }catch(e){}
 }
-const originalAdd=add;
-add=function(id){originalAdd(id);persist()};
+if(isMenu){
+ const originalAdd=add;
+ add=function(id){originalAdd(id);persist()};
+}else{
+ const originalAddItem=addItem;
+ addItem=function(id){originalAddItem(id);persist()};
+}
 const originalRender=renderCart;
 renderCart=function(){originalRender();persist()};
 if(typeof count==="function"&&isMenu){count();renderCart()}
