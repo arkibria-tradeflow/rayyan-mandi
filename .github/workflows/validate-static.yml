@@ -1,0 +1,34 @@
+name: Validate Rayyan static website
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JavaScript syntax
+        run: |
+          node --check menu-extras.js
+          node --check home-extras.js
+      - name: Verify HTML, assets and menu data
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          home=Path('index.html').read_text()
+          menu=Path('menu.html').read_text()
+          extra=Path('menu-extras.js').read_text()
+          for filename in ['index.html','menu.html','home-extras.css','home-extras.js','menu-extras.css','menu-extras.js']:
+              assert Path(filename).is_file(),filename
+          assert 'home-extras.css' in home and 'home-extras.js' in home
+          assert 'menu-extras.css' in menu and 'menu-extras.js' in menu
+          assert 'id="menuArea"' in menu and 'id="menuSection"' in home
+          assert len(re.findall(r'^\s*\["',extra,re.M))==32, "Expected 32 additional menu items"
+          assert 'Chicken Mandi' in extra and 'Kunafa' in extra and 'Hammour Mandi' in extra
+          assert 'Al Rigga' in extra and 'Confirm' in extra
+          print('PASS: HTML references, files and 36-menu-item catalog')
+          PY
