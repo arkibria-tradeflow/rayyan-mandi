@@ -14,6 +14,10 @@ jobs:
         run: |
           node --check menu-extras.js
           node --check home-extras.js
+          node --check rayyan-branches-data.js
+          node --check branch-info.js
+          node --check photo-enhancements.js
+          node --check order-sync.js
       - name: Verify HTML, assets and menu data
         run: |
           python - <<'PY'
@@ -22,7 +26,7 @@ jobs:
           home=Path('index.html').read_text()
           menu=Path('menu.html').read_text()
           extra=Path('menu-extras.js').read_text()
-          for filename in ['index.html','menu.html','home-extras.css','home-extras.js','menu-extras.css','menu-extras.js']:
+          for filename in ['index.html','menu.html','branches.html','order.html','home-extras.css','home-extras.js','menu-extras.css','menu-extras.js','rayyan-branches-data.js','branch-info.css','branch-info.js','photo-enhancements.css','photo-enhancements.js','order-sync.js']:
               assert Path(filename).is_file(),filename
           assert 'home-extras.css' in home and 'home-extras.js' in home
           assert 'menu-extras.css' in menu and 'menu-extras.js' in menu
@@ -30,5 +34,18 @@ jobs:
           assert len(re.findall(r'^\s*\["',extra,re.M))==32, "Expected 32 additional menu items"
           assert 'Chicken Mandi' in extra and 'Kunafa' in extra and 'Hammour Mandi' in extra
           assert 'Al Rigga' in extra and 'Confirm' in extra
-          print('PASS: HTML references, files and 36-menu-item catalog')
+          for filename in ['index.html','menu.html']:
+              page=Path(filename).read_text()
+              for ref in ['rayyan-branches-data.js','branch-info.js','order-sync.js','branch-info.css']:
+                  assert ref in page,(filename,ref)
+          assert 'photo-enhancements.js' in menu
+          assert 'Review WhatsApp message' in Path('order.html').read_text()
+          assert 'Doha' in Path('rayyan-branches-data.js').read_text() or 'Al Wukair' in Path('rayyan-branches-data.js').read_text()
+          order=Path('order.html').read_text()
+          import re
+          inline=re.findall(r'<script>(.*?)</script>',order,re.S)
+          assert inline, 'Expected inline checkout script'
+          Path('/tmp/order-check.js').write_text(inline[-1])
+          print('PASS: HTML references, six branches, demo checkout, photos and 36-item catalog')
           PY
+          node --check /tmp/order-check.js
