@@ -1,0 +1,12 @@
+
+.r-branch-panel{margin:15px 0 20px;border-radius:16px;background:linear-gradient(145deg,#f6f0e6,#fffaf3);border:1px solid #e1d2bf;padding:16px;color:#3c2a20}
+.r-branch-panel .r-eyebrow{font-size:9px;color:#a17b47;letter-spacing:1.8px;font-weight:800;text-transform:uppercase}
+.r-branch-panel h3{font:500 21px Georgia,serif;margin:7px 0 5px;color:#37271e}
+.r-branch-panel p{font-size:11px;color:#877769;line-height:1.6;margin:5px 0}
+.r-branch-panel .r-hours{font-size:11px;color:#6e563f;font-weight:700}
+.r-branch-panel .r-branch-links{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:13px}
+.r-branch-panel .r-branch-links a{border-radius:9px;border:1px solid #d6c4ab;padding:10px 3px;text-align:center;text-decoration:none;color:#533a29;background:#fffdf9;font-size:10px;font-weight:800}
+.r-branch-panel .r-branch-links a:first-child{background:#38271f;border-color:#38271f;color:#f8e7cd}
+.r-branch-panel .r-hint{font-size:9px;color:#9d8d7a;margin-top:11px}
+.r-branch-panel .r-see-all{display:inline-block;color:#805a34;font-size:11px;text-decoration:underline;text-underline-offset:4px;margin-top:11px}
+html[dir="rtl"] .r-branch-panel{direction:rtl}
