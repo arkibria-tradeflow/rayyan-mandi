@@ -11,6 +11,20 @@ const assert=require("node:assert/strict");
  console.log("Menu cards",await page.locator(".rayyan-menu-card").count());
  assert.equal(await page.locator(".rayyan-menu-card").count(),32);
  assert.ok(await page.locator(".rayyan-menu-illustration.photo img").count()>15,"Food photos not injected");
+ const photoIds=["extra12","extra13","extra16","extra17","extra18","extra19","extra20","extra21","extra22","extra23"];
+ for(const id of photoIds){
+   const img=page.locator('.rayyan-menu-card[data-id="'+id+'"] img');
+   assert.equal(await img.count(),1,id+" should have real photo");
+   const url=await img.getAttribute("src");
+   assert.ok(url && url.endsWith(".webp"),id+" should use local WebP");
+   const loaded=await img.evaluate(async el=>{
+     el.loading="eager";
+     if(!el.complete) await new Promise(resolve=>{el.addEventListener("load",resolve,{once:true});el.addEventListener("error",resolve,{once:true});setTimeout(resolve,7000)});
+     return el.complete && el.naturalWidth>0;
+   });
+   assert.ok(loaded,id+" photo failed to load");
+ }
+ console.log("PASS: ten previously missing dish images render and load");
  assert.ok((await page.locator("#verifiedBranchPanel").innerText()).includes("11:00"),"Verified branch hours missing");
  await page.locator('[data-add="extra5"]').click();
  assert.ok(Number(await page.locator("#cartCount").innerText())>=1,"Basket count did not increment");
