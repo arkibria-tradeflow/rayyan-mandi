@@ -67,7 +67,9 @@
    const group=extras.filter(p=>p.group===cat);
    text+='<div class="rayyan-group" data-category="'+cat+'"><div class="rayyan-group-head"><h3>'+categories[cat][lang==="ar"?1:0]+'</h3><small>'+group.length+' '+z.count.toLowerCase()+'</small></div><div class="rayyan-menu-grid">';
    group.forEach(p=>{
-    text+='<article class="rayyan-menu-card" data-id="'+p.id+'" data-group="'+p.group+'" data-terms="'+escapeHTML((p.name+" "+p.ar).toLowerCase())+'"><div class="rayyan-menu-illustration"><strong>'+symbols[cat]+'</strong><small>RAYYAN</small></div>';
+    const photo=(window.RayyanPhotoMap||{})[p.id];
+    const art=photo?'<div class="rayyan-menu-illustration photo" data-photo-src="'+photo+'"><img src="'+photo+'" alt="Illustrative food photograph: '+escapeHTML(p.name)+'" loading="lazy" decoding="async" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'"><span class="photo-fallback">R</span></div>':'<div class="rayyan-menu-illustration"><strong>'+symbols[cat]+'</strong><small>RAYYAN</small></div>';
+    text+='<article class="rayyan-menu-card" data-id="'+p.id+'" data-group="'+p.group+'" data-terms="'+escapeHTML((p.name+" "+p.ar).toLowerCase())+'">'+art;
     text+='<div class="rayyan-menu-text" role="button" tabindex="0" data-detail="'+p.id+'"><h4>'+escapeHTML(lang==="ar"?p.ar:p.name)+'</h4><span class="rayyan-ar">'+escapeHTML(lang==="ar"?p.name:p.ar)+'</span><p>'+(lang==="ar"?"من قائمة مطعم الريان.":"From Rayyan's menu.")+'</p></div>';
     text+='<div class="rayyan-menu-meta"><span class="rayyan-menu-price">'+(countryQ?z.ask:'<small>AED </small>'+p.price)+'</span><button type="button" class="rayyan-menu-add" data-add="'+p.id+'" aria-label="Add '+escapeHTML(p.name)+'">+</button></div></article>';
    });
