@@ -67,6 +67,15 @@ const assert=require("node:assert/strict");
  await page.waitForURL(/official-menu\.html/);
  console.log("PASS old URL redirect");
  await page.goto(base+"book-table.html",{waitUntil:"domcontentloaded"});
+ assert.equal(await page.locator("#demoNotice").count(),0);
+ assert.ok(await page.locator("#statusDisclosure").count());
+ const geometry=await page.evaluate(()=>{
+  const date=document.querySelector("#date").getBoundingClientRect(),time=document.querySelector("#time").getBoundingClientRect();
+  return {dateRight:date.right,timeLeft:time.left,pageWidth:document.documentElement.scrollWidth,viewport:innerWidth};
+ });
+ assert.ok(geometry.dateRight<=geometry.timeLeft+1,"Date and time inputs overlap");
+ assert.ok(geometry.pageWidth<=geometry.viewport+1,"Horizontal overflow");
+ console.log("PASS compact booking responsive layout with no overlap");
  await page.locator("#guest").fill("Test Guest");
  await page.locator("#phone").fill("+971501234567");
  await page.locator("#date").fill("2026-11-12");
