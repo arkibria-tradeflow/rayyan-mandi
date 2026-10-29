@@ -23,8 +23,8 @@ function branch(){return B.find(x=>x.id===currentId)||B[0]}
 function render(){const t=labels[language],b=branch();document.documentElement.lang=language;document.documentElement.dir=language==="ar"?"rtl":"ltr";$("language").textContent=language==="en"?"عربي":"EN";
 document.querySelectorAll("[data-i]").forEach(n=>{const key=n.dataset.i;if(t[key])n.innerHTML=t[key]});$("branchSelect").innerHTML=B.map(x=>'<option value="'+x.id+'"'+(x.id===b.id?" selected":"")+'>'+esc(language==="ar"?x.ar:x.name)+'</option>').join("");
 $("branchMeta").innerHTML='<strong>'+esc(language==="ar"?b.ar:b.name)+'</strong><p>⌖ '+esc(b.address)+'<br>◷ '+esc(language==="ar"?b.hoursAr:b.hours)+'</p><a href="'+window.rayyanMaps(b)+'" target="_blank" rel="noopener">'+t.directions+'</a>';
-$("items").innerHTML=basket.length?basket.map((p,i)=>'<div class="summary-line"><div class="summary-thumb">✦</div><div class="summary-text"><strong>'+esc(language==="ar"?p.ar||p.name:p.name)+'</strong><small>'+(b.country==="qatar"?"Confirm with branch":"AED "+Number(p.price).toFixed(2))+'</small></div><div class="stepper"><button type="button" data-at="'+i+'" data-d="-1">−</button><b>'+p.qty+'</b><button type="button" data-at="'+i+'" data-d="1">+</button></div></div>').join(""):'<div class="empty">'+t.empty+'<br><a href="menu.html">'+t.browse+' ↗</a></div>';
-const total=basket.reduce((v,p)=>v+Number(p.price||0)*p.qty,0);$("subtotal").textContent=b.country==="qatar"?(language==="ar"?"يؤكد مع الفرع":"Confirm with branch"):"AED "+total.toFixed(2);
+$("items").innerHTML=basket.length?basket.map((p,i)=>'<div class="summary-line"><div class="summary-thumb">✦</div><div class="summary-text"><strong>'+esc(language==="ar"?p.ar||p.name:p.name)+'</strong><small>'+(b.country==="qatar"||p.price==null?"Confirm with branch":"AED "+Number(p.price).toFixed(2))+'</small></div><div class="stepper"><button type="button" data-at="'+i+'" data-d="-1">−</button><b>'+p.qty+'</b><button type="button" data-at="'+i+'" data-d="1">+</button></div></div>').join(""):'<div class="empty">'+t.empty+'<br><a href="menu.html">'+t.browse+' ↗</a></div>';
+const total=basket.reduce((v,p)=>v+Number(p.price||0)*p.qty,0);$("subtotal").textContent=b.country==="qatar"?(language==="ar"?"يؤكد مع الفرع":"Confirm with branch"):"AED "+total.toFixed(2)+(basket.some(p=>p.price==null)?" + items to quote":"");
 document.querySelectorAll("[data-at]").forEach(button=>button.onclick=()=>{const p=basket[Number(button.dataset.at)];p.qty=Math.max(0,p.qty+Number(button.dataset.d));basket=basket.filter(p=>p.qty>0);save();render()});
 document.querySelectorAll("#mode button").forEach(n=>{n.classList.toggle("active",n.dataset.mode===mode)});$("addressField").hidden=mode!=="delivery";$("scheduleFields").hidden=$("when").value!=="scheduled";$("when").options[0].text=t.asap;$("when").options[1].text=t.scheduled;
 }
@@ -40,8 +40,8 @@ const total=basket.reduce((v,p)=>v+Number(p.price||0)*p.qty,0);
 message="*RAYYAN MANDI — DEMO WEBSITE INQUIRY*\n*This is a prototype demonstration. Please do not process as a confirmed order.*\n\n"+
 "Branch: "+b.name+"\nService: "+(mode==="delivery"?"Delivery inquiry":"Pickup inquiry")+"\nPreferred time: "+preferred+"\n"+
 "Name: "+name+"\nPhone: "+phone+"\n"+(mode==="delivery"?"Delivery address: "+address+"\n":"")+
-"\n*Dishes*\n"+basket.map(p=>"• "+p.name+" × "+p.qty+(b.country==="uae"?" — AED "+(Number(p.price)*p.qty).toFixed(2):"")).join("\n")+
-"\n"+(b.country==="uae"?"Indicative subtotal: AED "+total.toFixed(2)+"\n":"Prices: Please quote in QAR.\n")+
+"\n*Dishes*\n"+basket.map(p=>"• "+p.name+" × "+p.qty+(b.country==="uae"?(p.price==null?" — Price to confirm":" — AED "+(Number(p.price)*p.qty).toFixed(2)):"")).join("\n")+
+"\n"+(b.country==="uae"?"Indicative subtotal: AED "+total.toFixed(2)+(basket.some(p=>p.price==null)?" (plus unpriced items; please quote)":"")+"\n":"Prices: Please quote in QAR.\n")+
 (notes?"Notes: "+notes+"\n":"")+"\nPlease confirm availability, final prices, and any delivery fee. Thank you.";
 $("preview").textContent=message;$("modal").classList.add("open");$("modal").setAttribute("aria-hidden","false")};
 $("edit").onclick=()=>{$("modal").classList.remove("open");$("modal").setAttribute("aria-hidden","true")};
