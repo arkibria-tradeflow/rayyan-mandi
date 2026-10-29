@@ -6,7 +6,7 @@
 <header><a href="index.html" class="back">‹ <span id="back">Home</span></a><a href="index.html"><strong>RAYYAN <em>✦</em></strong></a><button id="langToggle" type="button">عربي</button></header>
 <section class="hero"><div class="eyebrow" id="heroLabel">THE RAYYAN EXPERIENCE</div><h1 id="heroTitle">Find your <em>Rayyan.</em></h1><p id="heroText">Six welcoming branches across Dubai and Qatar, all sharing one tradition of Arabian hospitality.</p></section>
 <main class="content"><div class="intro"><strong id="introTitle">Our locations</strong><small id="sixCount">05 UAE · 01 QATAR</small></div><div class="switch" id="countrySwitch"><button class="active" data-country="all">All 6</button><button data-country="uae">Dubai</button><button data-country="qatar">Qatar</button></div><div id="branchCards"></div><p class="disclaimer" id="disclaimer">Branch addresses, phone numbers and opening hours come from public map listings checked 28 October 2026. Hours can change, particularly on holidays. WhatsApp contacts were supplied in Rayyan's menu; please confirm directly before visiting or placing an order.</p></main>
-<nav class="bottom" aria-label="Site navigation"><a href="index.html">⌂<br>Home</a><a href="menu.html">♧<br>Menu</a><a href="branches.html" class="active">⌖<br>Branches</a><a href="order.html">▣<br>Order</a></nav>
+<nav class="bottom" aria-label="Site navigation"><a href="index.html">⌂<br>Home</a><a href="official-menu.html">♧<br>Menu</a><a href="branches.html" class="active">⌖<br>Branches</a><a href="order.html">▣<br>Order</a></nav>
 <script src="rayyan-branches-data.js"></script><script>
 (function(){
 var lang="en",country="all",data=window.RayyanBranches,root=document.getElementById("branchCards");
@@ -16,7 +16,7 @@ function update(){var t=labels[lang];document.documentElement.lang=lang;document
 document.querySelectorAll("#countrySwitch button").forEach(b=>{b.classList.toggle("active",b.dataset.country===country);b.textContent=t[b.dataset.country==="all"?"all":b.dataset.country==="uae"?"dubai":"qatar"]});
 var selected="";try{selected=localStorage.getItem("rayyan_demo_branch")||"deira"}catch(e){}
 root.innerHTML=data.filter(b=>country==="all"||b.country===country).map(b=>'<article class="branch '+(b.id===selected?"selected":"")+'"><div class="top"><div><h2>'+esc(lang==="ar"?b.ar:b.name)+'</h2><b>'+esc(b.city)+'</b></div>'+(b.id===selected?"<mark>"+t.selected+"</mark>":"")+'</div><p>⌖ '+esc(b.address)+'<br>'+esc(b.landmark)+'</p><div class="hours">◷ '+esc(lang==="ar"?b.hoursAr:b.hours)+'</div><div class="buttons"><a href="tel:'+b.phone+'">'+t.call+'</a><a target="_blank" rel="noopener" href="'+window.rayyanMaps(b)+'">'+t.maps+'</a><a href="https://wa.me/'+b.wa+'?text='+encodeURIComponent("Hello Rayyan Mandi "+b.name+", can you please confirm your menu and availability?")+'" target="_blank" rel="noopener">'+t.wa+'</a></div><button class="choose" data-id="'+b.id+'">'+t.select+' ↗</button></article>').join("");
-document.querySelectorAll(".choose").forEach(btn=>btn.onclick=()=>{try{localStorage.setItem("rayyan_demo_branch",btn.dataset.id)}catch(e){}location.href="menu.html"});
+document.querySelectorAll(".choose").forEach(btn=>btn.onclick=()=>{try{localStorage.setItem("rayyan_demo_branch",btn.dataset.id)}catch(e){}location.href="official-menu.html"});
 }
 document.getElementById("langToggle").onclick=()=>{lang=lang==="en"?"ar":"en";update()};
 document.querySelectorAll("#countrySwitch button").forEach(b=>b.onclick=()=>{country=b.dataset.country;update()});update();
