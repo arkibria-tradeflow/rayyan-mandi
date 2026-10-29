@@ -7,3 +7,10 @@
 .rayyan-photo-credit summary{cursor:pointer;font-weight:700;color:#80603e}
 .rayyan-photo-credit a{color:#79522b;text-decoration:underline}
 .rayyan-photo-note{font-size:10px;margin:12px 0;color:#9a8876;line-height:1.6}
+
+
+.rayyan-side-photo{width:68px;height:70px;border-radius:10px;object-fit:cover;flex:0 0 68px;display:block;border:1px solid #e4d7c7}
+.simple:has(.rayyan-side-photo){display:flex;align-items:center;gap:10px}
+.rayyan-menu-illustration.photo img{transition:opacity .2s ease}
+.rayyan-menu-illustration.photo img:not([src]){opacity:0}
+.rayyan-menu-illustration.photo .photo-fallback{display:none;font:500 18px Georgia,serif;inset:0;position:absolute;place-items:center;color:#a88959;background:#eee2d0}
