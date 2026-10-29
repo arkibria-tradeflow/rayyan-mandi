@@ -47,6 +47,6 @@
  const notes=document.createElement("details");
  notes.className="rayyan-photo-credit";
  notes.innerHTML='<summary>About the food photographs &amp; credits</summary>'+
- '<p>Rayyan’s original printed-menu featured dish photos remain. The additional images are real photographs of similar food from Wikimedia Commons, not official Rayyan product photos. Actual presentation may vary. Some photos are cropped and resized for the layout. Licensed images are credited in the downloadable package and <a href="data/photo-credits.csv" target="_blank" rel="noopener">source/credits register</a>.</p>';
+ '<p>Rayyan’s original printed-menu featured dish photos remain. The additional images are real photographs of similar food from Pexels under its free-use photo license, not official Rayyan product photos. Actual presentation may vary. Some photos are cropped and resized for the layout. Licensed images are credited in the downloadable package and <a href="data/photo-credits.csv" target="_blank" rel="noopener">source/credits register</a>.</p>';
  area.insertAdjacentElement("afterend",notes);
 })();
