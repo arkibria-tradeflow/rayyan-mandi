@@ -1,0 +1,10 @@
+/* Shared four-item Rayyan mobile navigation: equal columns and safe-area support */
+.rayyan-four-nav{position:fixed!important;bottom:0!important;left:50%!important;transform:translateX(-50%)!important;width:100%!important;max-width:520px!important;z-index:50!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:stretch!important;justify-items:stretch!important;gap:0!important;min-height:72px!important;padding:10px 9px max(15px,env(safe-area-inset-bottom))!important;background:#fffdfa!important;border-top:1px solid #eadfd1!important;border-radius:0!important;box-shadow:0 -7px 24px rgba(55,38,26,.06)!important}
+.rayyan-four-nav>a{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;min-width:0!important;min-height:49px!important;margin:0!important;padding:4px 2px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:#887766!important;text-align:center!important;text-decoration:none!important;font:700 10px/1.2 "Avenir Next",Arial,sans-serif!important;white-space:nowrap!important}
+.rayyan-four-nav>a svg{width:21px!important;height:21px!important;stroke:currentColor!important;fill:none!important;stroke-width:1.7!important;flex-shrink:0}
+.rayyan-four-nav>a.current{color:#38261d!important}
+.rayyan-four-nav>a:focus-visible{outline:2px solid #bc955e!important;outline-offset:-2px}
+.rayyan-four-nav>a>span{display:block!important;font:inherit!important;margin:0!important}
+body{padding-bottom:max(87px,calc(72px + env(safe-area-inset-bottom)))!important}
+.rayyan-location-required .sheet-close{display:none!important}
+.rayyan-location-required .sheet-sub:after{content:"Select a branch to continue · اختر الفرع للمتابعة";display:block;font-size:11px;margin-top:7px;color:#9a6f39;font-weight:700}
