@@ -32,3 +32,17 @@ This is a **client presentation prototype**. Branch contacts, availability, pric
 ## Technology
 
 Static HTML, CSS, and JavaScript. No build tools, dependencies, databases, or API keys required.
+
+
+## Real dish photography (October 2026)
+
+The menu now uses **19 optimized local WebP food photographs**, mapped to **34 menu items**, while retaining the two original Rayyan feature photos.
+
+- [Download the ZIP photo package](Rayyan_Mandi_Dish_Photos.zip) — photos, filenames, mapping, credits and notes
+- [Dish-to-image mapping](data/dish-image-mapping.csv)
+- [Image sources and credits](data/photo-credits.csv)
+- [Reusable source manifest](data/photo-sources.json)
+
+These are representative real photographs licensed for reuse under the indicated source terms, not verified photos of Rayyan's actual prepared dishes. Confirm with the restaurant before an official launch.
+
+**Uploading the ZIP itself to GitHub does not extract the photos.** Individual images are already installed in the repository under [assets/menu/](assets/menu/) and automatically served from GitHub Pages.
