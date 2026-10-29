@@ -151,5 +151,23 @@
     "subject": "Luqaimat dessert",
     "description": "Illustrative public photo, not a Rayyan product photograph",
     "source_page": "https://commons.wikimedia.org/wiki/File:Sweet3.jpg"
+  },
+  {
+    "slug": "chicken-curry",
+    "source": "Chicken Curry.JPG",
+    "author": "Miansari66",
+    "license": "CC0 1.0",
+    "subject": "Chicken curry",
+    "description": "Illustrative public photo, not a Rayyan product photograph",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Chicken_Curry.JPG"
+  },
+  {
+    "slug": "tomato-sauce",
+    "source": "Tomato sauce - Stew.jpg",
+    "author": "Adesolive",
+    "license": "CC0 1.0",
+    "subject": "Tomato sauce",
+    "description": "Illustrative public photo, not a Rayyan product photograph",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Tomato_sauce_-_Stew.jpg"
   }
 ]
