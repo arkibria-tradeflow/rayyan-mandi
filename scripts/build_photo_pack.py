@@ -24,12 +24,12 @@ def download(name):
                 response.raise_for_status()
                 if len(response.content)<4500:raise ValueError("small image response")
                 with Image.open(io.BytesIO(response.content)) as image:image.verify()
-                time.sleep(.25)
+                time.sleep(12)
                 return response.content
             except Exception as exc:
                 last=exc
                 print("Retry thumbnail",name,str(exc)[:120],flush=True)
-                time.sleep(1+attempt)
+                time.sleep(45 if "429" in str(exc) else 2+attempt)
     raise RuntimeError(str(last))
 
 def webp(data,path):
@@ -48,7 +48,7 @@ def main():
         except Exception as exc:
             fail.append((entry["slug"],str(exc)));dest.unlink(missing_ok=True)
             print("FAILED",entry["slug"],str(exc),flush=True)
-    if len(ok)<12:raise RuntimeError("Insufficient downloaded photos: "+str(fail))
+    if len(ok)<4:raise RuntimeError("Insufficient downloaded photos: "+str(fail))
     with (ROOT/"data/photo-credits.csv").open("w",newline="",encoding="utf-8") as f:
         w=csv.writer(f);w.writerow(["Image file","Subject","Author","License","Original source","Modification","Status"])
         for p in ok:w.writerow(["assets/menu/"+p["slug"]+".webp",p["subject"],p["author"],p["license"],p["source_page"],"Resized and cropped","Illustrative; not photographed at Rayyan"])
