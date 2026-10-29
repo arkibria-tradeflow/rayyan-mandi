@@ -1,12 +1,36 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f9f7f1"><title>Rayyan Mandi — Official Menu</title>
 <style>
 :root{--bg:#faf8f3;--cream:#f3ecdf;--ink:#35251d;--gold:#b99254;--line:#e7dac9;--muted:#87786d}*{box-sizing:border-box}html{background:#e8e1d7}body{max-width:520px;margin:0 auto;background:var(--bg);min-height:100dvh;padding-bottom:114px;color:var(--ink);font-family:"Avenir Next",Avenir,Arial,sans-serif}button,input,select{font:inherit}a{color:inherit;text-decoration:none}header{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);background:rgba(250,248,243,.97);backdrop-filter:blur(12px)}header strong{font:500 23px Georgia,serif;letter-spacing:1.2px}header strong span{color:var(--gold)}.iconbtn{border:1px solid #decfba;background:#fffaf1;border-radius:10px;padding:9px;color:#67482f;font-size:12px}.intro{padding:24px 19px 16px;background:linear-gradient(145deg,#f8f3e9,#fffdfa)}.eyebrow{font-size:9px;letter-spacing:2px;color:#a57a40;font-weight:800}.intro h1{font:500 38px/1.05 Georgia,serif;margin:11px 0 8px}.intro h1 em{font-style:italic;color:#b08a50}.intro p{font-size:12px;line-height:1.65;color:#8b7868;margin:0}.branch{border:1px solid var(--line);background:#fffdf9;border-radius:12px;padding:12px 13px;margin:17px 0 5px;display:flex;align-items:center;gap:10px}.branch span{font-size:12px;color:#9d7848}.branch select{border:0;background:transparent;flex:1;color:#4b3827;font-weight:700;font-size:12px;min-width:0;outline:0}.search{padding:0 19px}.search input{width:100%;height:45px;border:1px solid var(--line);background:#fffefa;border-radius:11px;padding:0 14px;font-size:13px;color:var(--ink);outline:0}.filters{display:flex;gap:7px;padding:14px 19px 9px;overflow-x:auto;scrollbar-width:none;position:sticky;top:62px;background:var(--bg);z-index:8;border-bottom:1px solid #f0e6d8}.filters::-webkit-scrollbar{display:none}.filters button{flex:none;border:1px solid #dccbb4;background:#fffcf7;color:#785f42;padding:10px 12px;border-radius:9px;font-weight:750;font-size:11px}.filters button.active{background:#3b2921;border-color:#3b2921;color:#fff0d7}.catalog{padding:6px 18px 15px}.group{scroll-margin-top:135px;margin:18px 0 25px}.group h2{font:500 26px Georgia,serif;margin:0 0 13px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}.group h2 small{font:11px Arial,sans-serif;color:#af9c80;white-space:nowrap}.card{display:flex;gap:12px;align-items:center;min-height:91px;background:#fffefa;border:1px solid #e5d7c7;border-radius:14px;padding:10px;margin-bottom:9px}.photo{width:70px;height:72px;border-radius:10px;object-fit:cover;background:#efe4d2;flex:0 0 70px}.placeholder{width:70px;height:72px;border-radius:10px;display:grid;place-items:center;background:#f1e6d5;border:1px solid #e1cfb6;color:#ab8754;font:26px Georgia,serif;flex:0 0 70px}.details{flex:1;min-width:0}.details b{display:block;font:600 16px/1.14 Georgia,serif}.details small{display:block;font-size:10px;color:#b19678;margin-top:6px}.price{font-size:12px;font-weight:800;color:#493122;white-space:nowrap}.price small{font-size:10px;color:#ad8b5b}.price sup{vertical-align:baseline;font-size:9px}.actions{display:flex;flex-direction:column;gap:10px;align-items:end}.add{border:0;background:#3a2920;color:#faecd6;font-size:21px;border-radius:10px;width:36px;height:36px}.smallNote{font-size:9px;line-height:1.5;color:#9a8d7c;margin-top:6px}.footnote{background:#f4ebde;border:1px solid #e6d7c2;padding:15px;border-radius:13px;margin:18px 0;color:#786854;font-size:11px;line-height:1.7}.footnote a{text-decoration:underline;color:#835a35}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;padding:12px 12px max(15px,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:#fffefa;display:grid;grid-template-columns:56px 56px 56px 1fr;gap:7px;align-items:center;z-index:10}.bottom>a{font-size:10px;font-weight:800;text-align:center;color:#806e5c}.bottom>a span{display:block;font-size:20px;margin-bottom:3px}.bottom button{padding:15px 7px;border:0;border-radius:12px;background:#3b281e;color:#f7e5cc;font-size:13px;font-weight:800}.empty{padding:35px 15px;text-align:center;color:#8e7969;font-size:13px}html[dir=rtl] .intro,html[dir=rtl] .details,html[dir=rtl] .catalog{text-align:right}html[dir=rtl] .card{direction:rtl}
-</style></head><body>
+</style><link rel="stylesheet" href="dish-preview.css?v=1"></head><body>
 <header><a href="index.html" class="iconbtn">‹ <span id="homeLabel">Home</span></a><a href="index.html"><strong>RAYYAN <span>✦</span></strong></a><button id="lang" class="iconbtn">عربي</button></header>
 <div class="intro"><div class="eyebrow" id="eyebrow">RAYYAN MANDI RESTAURANT</div><h1 id="headline">Explore our <em>menu.</em></h1><p id="subheadline">Authentic Arabian Mandi, Haneeth, grilled specialties, fresh seafood and more.</p>
 <label class="branch"><span>⌖</span><select id="branch" aria-label="Choose branch"></select></label></div>
 <div class="search"><input id="search" type="search" placeholder="Search dishes…"></div>
 <div class="filters" id="filters"></div><main class="catalog" id="catalog"><p class="empty">Loading menu…</p></main>
+<div class="dish-overlay" id="dishOverlay" role="dialog" aria-modal="true" aria-labelledby="dishName" hidden>
+  <div class="dish-sheet">
+    <div class="dish-sheet-top"><strong>RAYYAN <span>✦</span></strong><button type="button" id="dishClose" class="dish-x" aria-label="Close dish details">×</button></div>
+    <div class="dish-sheet-scroll">
+      <div class="dish-hero" id="dishImageArea"></div>
+      <div class="dish-sheet-content">
+        <div class="dish-detail-category" id="dishCategory"></div>
+        <h2 class="dish-detail-name" id="dishName"></h2>
+        <div class="dish-detail-arabic" id="dishOtherName"></div>
+        <div class="dish-detail-price" id="dishPrice"></div>
+        <div class="dish-portion" id="dishPortion" hidden></div>
+        <p class="dish-detail-note" id="dishPhotoNote"></p>
+      </div>
+    </div>
+    <div class="dish-sheet-footer">
+      <div class="dish-qty"><button type="button" id="dishMinus" aria-label="Decrease quantity">−</button><output id="dishQty">1</output><button type="button" id="dishPlus" aria-label="Increase quantity">+</button></div>
+      <button type="button" class="dish-submit" id="dishAdd">Add to order</button>
+    </div>
+  </div>
+</div>
+<div class="dish-lightbox" id="dishLightbox" role="dialog" aria-modal="true" aria-label="Full size dish image" hidden>
+  <button type="button" id="dishZoomClose" class="dish-x" aria-label="Close enlarged photograph">×</button>
+  <img id="dishZoomImg" alt="Enlarged illustrative food photograph">
+</div>
 <nav class="bottom" aria-label="Main navigation"><a href="index.html"><span>⌂</span>Home</a><a href="official-menu.html"><span>☷</span>Menu</a><a href="branches.html"><span>⌖</span>Locations</a><button id="order">◫ <span id="orderText">Order now</span> <span id="count"></span></button></nav>
 <script src="rayyan-branches-data.js"></script>
 <script>
@@ -22,6 +46,82 @@
  function branch(){return branches.find(b=>b.id===selected)||branches[0]}
  function save(){try{localStorage.setItem("rayyan_demo_branch",selected);const items=Object.entries(cart).filter(([,qty])=>qty>0).map(([id,qty])=>{const p=menu.items.find(x=>x.id===id.replace(/-(half|full)$/,""));if(!p)return null;const portion=id.endsWith("-full")?"full":id.endsWith("-half")?"half":null;return {id,name:p.name+(portion?" ("+portion+")":""),ar:p.ar+(portion?" ("+portion+")":""),price:portion?p[portion]:p.price,qty,pricing:p.priceType,half:p.half,full:p.full}}).filter(Boolean);localStorage.setItem("rayyan_demo_cart_v2",JSON.stringify({items,branchId:selected,updatedAt:new Date().toISOString()}))}catch(e){}}
  function price(p){const t=labels[lang];if(p.priceType==="half-full")return t.half+" <small>AED</small> "+p.half+" / "+t.full+" <small>AED</small> "+p.full;if(p.priceType==="aps")return t.aps+" (APS)";if(p.priceType==="availability"||p.priceType==="confirm")return t.confirm;return '<small>AED</small> '+(Number.isInteger(p.price)?p.price:p.price.toFixed(2))}
+
+ let currentDish=null,detailQty=1,detailPortion="half",previousFocus=null;
+ function detailWords(){
+   return lang==="ar"?
+     {view:"عرض صورة وتفاصيل الطبق",zoom:"عرض الصورة بحجم أكبر",none:"صورة هذا الطبق غير متوفرة حالياً",illustrative:"الصورة توضيحية؛ وقد يختلف تقديم الطبق في المطعم. يرجى تأكيد التوفر والسعر مع الفرع.",portion:"اختر الحجم",half:"نصف",full:"كامل",add:"إضافة إلى الطلب",confirm:"السعر والتوفر يُؤكدان مع الفرع",close:"إغلاق"}:
+     {view:"View dish photo and details",zoom:"Enlarge photo",none:"Photo not available for this dish yet",illustrative:"Illustrative food photo. Actual presentation may vary. Please confirm price and availability with your branch.",portion:"Choose portion",half:"Half",full:"Full",add:"Add to order",confirm:"Confirm price and availability with branch",close:"Close"};
+ }
+ function updateDishPrice(){
+   if(!currentDish)return;
+   const t=detailWords(),qatar=branch()?.country==="qatar",p=currentDish;
+   const shown=qatar? t.confirm :
+     p.priceType==="half-full" ? '<small>AED </small>'+(detailPortion==="full"?p.full:p.half) :
+     price(p);
+   $("dishPrice").innerHTML=shown;
+   if(p.priceType==="half-full"){
+     $("dishPortion").hidden=false;
+     $("dishPortion").innerHTML=
+       '<button type="button" data-portion="half" class="'+(detailPortion==="half"?"selected":"")+'">'+t.half+' · AED '+p.half+'</button>'+
+       '<button type="button" data-portion="full" class="'+(detailPortion==="full"?"selected":"")+'">'+t.full+' · AED '+p.full+'</button>';
+     $("dishPortion").querySelectorAll("[data-portion]").forEach(btn=>btn.onclick=()=>{detailPortion=btn.dataset.portion;updateDishPrice()});
+   }else {$("dishPortion").hidden=true;$("dishPortion").innerHTML=""}
+ }
+ function openDish(id){
+   const p=menu.items.find(item=>item.id===id);if(!p)return;
+   currentDish=p;detailQty=1;detailPortion="half";previousFocus=document.activeElement;
+   const t=detailWords(),g=menu.groups.find(group=>group.id===p.group);
+   $("dishOverlay").dir=lang==="ar"?"rtl":"ltr";
+   $("dishCategory").textContent=g?(lang==="ar"?g.ar:g.en):"RAYYAN";
+   $("dishName").textContent=lang==="ar"?p.ar:p.name;
+   $("dishOtherName").textContent=lang==="ar"?p.name:p.ar;
+   $("dishQty").textContent="1";
+   $("dishPhotoNote").textContent=p.photo?t.illustrative:t.none+". "+t.confirm+".";
+   $("dishAdd").textContent=t.add;
+   $("dishClose").setAttribute("aria-label",t.close);
+   const image=$("dishImageArea");
+   if(p.photo){
+     image.innerHTML='<img id="dishHeroImg" src="'+escape(p.photo)+'" alt="'+escape(lang==="ar"?p.ar:p.name)+'"><button type="button" id="dishZoom" class="dish-zoom">'+t.zoom+' ⤢</button>';
+     image.querySelector("img").onerror=()=>{image.innerHTML='<div class="dish-no-photo"><strong>✦</strong><span>'+t.none+'</span></div>';};
+     $("dishZoom").onclick=()=>{$("dishZoomImg").src=p.photo;$("dishLightbox").hidden=false;$("dishZoomClose").focus()};
+   }else image.innerHTML='<div class="dish-no-photo"><strong>✦</strong><span>'+t.none+'</span></div>';
+   updateDishPrice();
+   $("dishOverlay").hidden=false;
+   document.body.style.overflow="hidden";
+   $("dishClose").focus();
+ }
+ function closeDish(){
+   $("dishLightbox").hidden=true;$("dishOverlay").hidden=true;
+   document.body.style.overflow="";
+   currentDish=null;
+   if(previousFocus?.isConnected)previousFocus.focus();
+ }
+ $("dishClose").onclick=closeDish;
+ $("dishOverlay").onclick=event=>{if(event.target===$("dishOverlay"))closeDish()};
+ $("dishZoomClose").onclick=()=>{$("dishLightbox").hidden=true;$("dishClose").focus()};
+ $("dishLightbox").onclick=e=>{if(e.target===$("dishLightbox"))$("dishZoomClose").click()};
+ $("dishMinus").onclick=()=>{detailQty=Math.max(1,detailQty-1);$("dishQty").textContent=detailQty};
+ $("dishPlus").onclick=()=>{detailQty=Math.min(99,detailQty+1);$("dishQty").textContent=detailQty};
+ $("dishAdd").onclick=()=>{
+   if(!currentDish)return;
+   const id=currentDish.id+(currentDish.priceType==="half-full"?"-"+detailPortion:"");
+   cart[id]=(cart[id]||0)+detailQty;
+   save();updateCount();closeDish();
+ };
+ $("catalog").addEventListener("click",e=>{
+   const item=e.target.closest("[data-view]");
+   if(item)openDish(item.dataset.view);
+ });
+ $("catalog").addEventListener("keydown",e=>{
+   if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-view]")){e.preventDefault();openDish(e.target.dataset.view)}
+ });
+ document.addEventListener("keydown",e=>{
+   if(e.key!=="Escape")return;
+   if(!$("dishLightbox").hidden){$("dishZoomClose").click();return}
+   if(!$("dishOverlay").hidden){closeDish();return}
+ });
+
  function render(){
  const t=labels[lang];document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";$("lang").textContent=lang==="en"?"عربي":"EN";$("homeLabel").textContent=t.home;$("headline").innerHTML=t.head;$("subheadline").textContent=t.intro;$("search").placeholder=t.search;$("orderText").textContent=t.order;
  $("branch").innerHTML=branches.map(b=>'<option value="'+b.id+'"'+(selected===b.id?" selected":"")+'>'+escape(lang==="ar"?b.ar:b.name)+'</option>').join("");
@@ -30,7 +130,7 @@
  const groups=menu.groups.map(g=>({...g,items:menu.items.filter(p=>(group==="all"||p.group===group)&&p.group===g.id&&(!query||(p.name+" "+p.ar).toLowerCase().includes(query)))})).filter(g=>g.items.length);
  $("catalog").innerHTML=groups.length?groups.map(g=>'<section class="group"><h2>'+escape(lang==="ar"?g.ar:g.en)+' <small>'+g.items.length+' dishes</small></h2>'+g.items.map(p=>{
  const photo=p.photo?'<img class="photo" loading="lazy" decoding="async" src="'+escape(p.photo)+'" alt="Illustrative dish photo" onerror="this.style.opacity=0">':'<div class="placeholder">✦</div>';
- return '<article class="card">'+photo+'<div class="details"><b>'+escape(lang==="ar"?p.ar:p.name)+'</b><small>'+escape(lang==="ar"?p.name:p.ar)+'</small></div><div class="actions"><div class="price">'+price(p)+'</div><button class="add" data-add="'+p.id+'" aria-label="Add dish">+</button></div></article>'}).join("")+'</section>').join("")+'<div class="footnote">'+t.note+'<br><a href="data/official-menu.json">'+t.source+'</a></div>':'<p class="empty">'+t.no+'</p>';
+ return '<article class="card"><button type="button" class="dish-view" data-view="'+p.id+'" aria-label="'+(lang==="ar"?"عرض صورة وتفاصيل ":"View photo and details for ")+escape(lang==="ar"?p.ar:p.name)+'">'+photo+'<div class="details"><b>'+escape(lang==="ar"?p.ar:p.name)+'</b><small>'+escape(lang==="ar"?p.name:p.ar)+'</small><span class="view-hint">'+(lang==="ar"?"اضغط لعرض الصورة والتفاصيل":"Tap to view photo & details")+'</span></div></button><div class="actions"><div class="price">'+price(p)+'</div><button class="add" data-add="'+p.id+'" aria-label="Add dish">+</button></div></article>'}).join("")+'</section>').join("")+'<div class="footnote">'+t.note+'<br><a href="data/official-menu.json">'+t.source+'</a></div>':'<p class="empty">'+t.no+'</p>';
  document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{const p=menu.items.find(x=>x.id===b.dataset.add);let key=b.dataset.add;if(p&&p.priceType==="half-full"){const full=confirm((lang==="ar"?"هل تريد الحجم الكامل؟ اختر إلغاء للنصف.":"Choose FULL portion (AED "+p.full+")? Tap Cancel for HALF (AED "+p.half+")."));key+="-"+(full?"full":"half")}cart[key]=(cart[key]||0)+1;save();updateCount()});
  updateCount()
  }
