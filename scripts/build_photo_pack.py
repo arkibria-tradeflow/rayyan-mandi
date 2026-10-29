@@ -12,25 +12,30 @@ session.headers.update({"User-Agent":"RayyanMandi-Demo-Media/1.0 (Commons attrib
 def download(name):
     filename=name.replace(" ","_")
     digest=hashlib.md5(filename.encode()).hexdigest()
-    url="https://upload.wikimedia.org/wikipedia/commons/"+digest[0]+"/"+digest[:2]+"/"+urllib.parse.quote(filename,safe="()")
-    urls=[url,"https://commons.wikimedia.org/wiki/Special:FilePath/"+urllib.parse.quote(filename)]
-    error=None
-    for candidate in urls:
-        for attempt in range(3):
+    q=urllib.parse.quote(filename,safe="()")
+    root="https://upload.wikimedia.org/wikipedia/commons/thumb/"+digest[0]+"/"+digest[:2]+"/"+q
+    # Wikimedia explicitly recommends generated thumbnails rather than original files for automation.
+    choices=[root+"/500px-"+q,root+"/330px-"+q]
+    last=None
+    for url in choices:
+        for attempt in range(2):
             try:
-                r=session.get(candidate,timeout=45);r.raise_for_status()
-                if len(r.content)<8000:raise ValueError("Small image response")
-                with Image.open(io.BytesIO(r.content)) as test:test.verify()
-                return r.content
+                response=session.get(url,timeout=18)
+                response.raise_for_status()
+                if len(response.content)<4500:raise ValueError("small image response")
+                with Image.open(io.BytesIO(response.content)) as image:image.verify()
+                time.sleep(.25)
+                return response.content
             except Exception as exc:
-                error=exc
-                print("Retry",name,str(exc)[:100],flush=True)
+                last=exc
+                print("Retry thumbnail",name,str(exc)[:120],flush=True)
                 time.sleep(1+attempt)
-    raise RuntimeError(str(error))
+    raise RuntimeError(str(last))
+
 def webp(data,path):
     with Image.open(io.BytesIO(data)) as im:
         im=ImageOps.exif_transpose(im).convert("RGB")
-        im=ImageOps.fit(im,(800,650),method=Image.Resampling.LANCZOS,centering=(0.5,0.46))
+        im=ImageOps.fit(im,(650,530),method=Image.Resampling.LANCZOS,centering=(0.5,0.46))
         im.save(path,"WEBP",quality=82,method=5)
     if path.stat().st_size<8000:raise ValueError("Invalid WebP file")
 def main():
