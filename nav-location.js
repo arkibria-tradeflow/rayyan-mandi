@@ -11,6 +11,10 @@
  const entries=[["home","Home","index.html"],["menu","Menu","official-menu.html"],["book","Book Table","book-table.html"],["order","Order","order.html"]];
  const nav=document.querySelector('nav.nav[aria-label="Bottom navigation"]')||document.querySelector("nav.bottom");
  if(nav){
+   // The official menu initializes its order handler asynchronously after loading JSON.
+   // Keep that original button available (but hidden) when replacing the visual nav.
+   const originalOrder=nav.querySelector("#order");
+   if(originalOrder){originalOrder.style.display="none";originalOrder.setAttribute("aria-hidden","true");originalOrder.tabIndex=-1;document.body.appendChild(originalOrder);}
    nav.className="rayyan-four-nav";
    nav.setAttribute("aria-label","Bottom navigation");
    nav.innerHTML=entries.map(([key,text,url])=>'<a href="'+url+'"'+(current===key?' class="current" aria-current="page"':'')+'><svg viewBox="0 0 24 24" aria-hidden="true">'+icons[key]+'</svg><span>'+text+'</span></a>').join("");
