@@ -77,6 +77,21 @@ const assert=require("node:assert/strict");
  assert.ok((await page.locator("#trackResult").innerText()).includes("Pending"));
  assert.equal(await page.locator("#adminArea").count(),0);
  console.log("PASS guest booking: pending, reference lookup, no admin dashboard");
+ await page.goto(base+"index.html");
+ const bookNav=page.locator("#navOrder");
+ await bookNav.click();
+ await page.waitForURL(/book-table\.html/);
+ console.log("PASS homepage bottom-nav booking");
+ await page.goto(base+"branches.html");
+ await page.waitForSelector(".reserve-branch");
+ assert.equal(await page.locator(".reserve-branch").count(),6);
+ await page.locator(".reserve-branch").first().click();
+ await page.waitForURL(/book-table\.html\?branch=/);
+ console.log("PASS branch-specific reservation actions");
+ await page.goto(base+"official-menu.html");
+ assert.ok(await page.locator('a.rayyan-nav-book').count()===1);
+ console.log("PASS menu permanent book-table navigation");
+
 
  assert.deepEqual(errors,[]);
  await browser.close();
