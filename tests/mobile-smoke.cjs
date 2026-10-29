@@ -6,7 +6,12 @@ const assert=require("node:assert/strict");
  const errors=[];page.on("pageerror",e=>errors.push(e.message));
  const base="http://127.0.0.1:8765/";
  await page.goto(base+"official-menu.html",{waitUntil:"networkidle"});
- await page.waitForSelector(".card",{timeout:12000});
+ await page.waitForSelector(".card",{timeout:12000}).catch(async err=>{
+  console.log("DEBUG PAGE ERRORS",errors);
+  console.log("DEBUG MENU CONTENT",String(await page.locator("#catalog").innerText()).slice(0,600));
+  console.log("DEBUG SCRIPT URLS",await page.locator("script[src]").evaluateAll(xs=>xs.map(x=>x.src)));
+  throw err;
+ });
  assert.equal(await page.locator(".card").count(),71);
  assert.ok((await page.locator("#catalog").innerText()).includes("Chicken Mandi"));
  assert.ok((await page.locator("#catalog").innerText()).includes("AED 29"));
