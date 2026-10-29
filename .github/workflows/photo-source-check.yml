@@ -14,7 +14,8 @@ jobs:
           python3 - <<'PY'
           import urllib.request, time
           urls=[
-          'https://upload.wikimedia.org/wikipedia/commons/6/64/Mandi_chicken.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Mandi_chicken.jpg/500px-Mandi_chicken.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Chicken_fry_piece_mandi.jpg/500px-Chicken_fry_piece_mandi.jpg',
           'https://commons.wikimedia.org/wiki/Special:FilePath/Mandi_chicken.jpg',
           'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=480'
           ]
