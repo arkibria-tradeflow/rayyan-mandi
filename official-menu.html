@@ -29,7 +29,7 @@
  $("filters").querySelectorAll("button").forEach(b=>b.onclick=()=>{group=b.dataset.group;render()});
  const groups=menu.groups.map(g=>({...g,items:menu.items.filter(p=>(group==="all"||p.group===group)&&p.group===g.id&&(!query||(p.name+" "+p.ar).toLowerCase().includes(query)))})).filter(g=>g.items.length);
  $("catalog").innerHTML=groups.length?groups.map(g=>'<section class="group"><h2>'+escape(lang==="ar"?g.ar:g.en)+' <small>'+g.items.length+' dishes</small></h2>'+g.items.map(p=>{
- const photo=p.photo?'<img class="photo" loading="lazy" decoding="async" src="'+escape(p.photo)+'" alt="Illustrative dish photo" onerror="this.outerHTML=\\'<div class=placeholder>✦</div>\\'">':'<div class="placeholder">✦</div>';
+ const photo=p.photo?'<img class="photo" loading="lazy" decoding="async" src="'+escape(p.photo)+'" alt="Illustrative dish photo" onerror="this.style.opacity=0">':'<div class="placeholder">✦</div>';
  return '<article class="card">'+photo+'<div class="details"><b>'+escape(lang==="ar"?p.ar:p.name)+'</b><small>'+escape(lang==="ar"?p.name:p.ar)+'</small></div><div class="actions"><div class="price">'+price(p)+'</div><button class="add" data-add="'+p.id+'" aria-label="Add dish">+</button></div></article>'}).join("")+'</section>').join("")+'<div class="footnote">'+t.note+'<br><a href="data/official-menu.json">'+t.source+'</a></div>':'<p class="empty">'+t.no+'</p>';
  document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;save();updateCount()});
  updateCount()
