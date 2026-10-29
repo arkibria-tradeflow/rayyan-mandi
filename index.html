@@ -102,7 +102,7 @@
   function sendOrder(){const items=Object.entries(cart).filter(([id,q])=>q>0);if(!items.length)return;let sum=items.reduce((s,[id,q])=>s+products[id].price*q,0);let msg='Hello Rayyan Mandi Restaurant,\nI would like to inquire about an order from '+selected.name+':\n'+items.map(([id,q])=>'- '+products[id].name+' x '+q).join('\n')+'\n\n'+(selected.country==='qatar'?'Please confirm local prices, availability and delivery / pickup options.':'Printed UAE menu total: AED '+sum+' (subject to branch confirmation). Please confirm availability, final pricing and delivery / pickup options.')+'\nThank you!';window.open(whatsUrl(msg),'_blank','noopener')}
   function setLang(next){lang=next;document.documentElement.lang=next;document.documentElement.dir=next==='ar'?'rtl':'ltr';$('langBtn').textContent=next==='en'?'ع':'EN';all('[data-i18n]').forEach(el=>{const val=t[next][el.dataset.i18n];if(val!==undefined)el.innerHTML=val});$('heroTitle').innerHTML=next==='en'?'Tradition,<br><i>served with soul.</i>':'أصالة المذاق،<br><i>وكرم الضيافة.</i>';renderCart()}
   $('branchBtn').onclick=openBranch;$('allBranches').onclick=openBranch;$('menuBtn').onclick=()=>openOverlay('menuOverlay');$('navBranches').onclick=openBranch;
-  $('navHome').onclick=()=>scrollToId('home');$('navMenu').onclick=()=>{location.href='menu.html'};$('heroMenu').onclick=()=>{location.href='menu.html'};$('menuMore').onclick=()=>{location.href='menu.html'};$('navOrder').onclick=()=>{renderCart();openOverlay('cartOverlay')};
+  $('navHome').onclick=()=>scrollToId('home');$('navMenu').onclick=()=>{location.href='official-menu.html'};$('heroMenu').onclick=()=>{location.href='official-menu.html'};$('menuMore').onclick=()=>{location.href='official-menu.html'};$('navOrder').onclick=()=>{renderCart();openOverlay('cartOverlay')};
   $('langBtn').onclick=()=>setLang(lang==='en'?'ar':'en');$('footerLanguage').onclick=()=>setLang(lang==='en'?'ar':'en');
   $('browseDishes').onclick=()=>{closeOverlay('cartOverlay');scrollToId('menuSection')};$('sendWhatsApp').onclick=sendOrder;
   all('.add-food').forEach(el=>el.onclick=()=>addItem(el.dataset.add));
@@ -111,7 +111,7 @@
   all('[data-close]').forEach(el=>el.onclick=()=>closeOverlay(el.dataset.close));
   all('.overlay').forEach(overlay=>overlay.addEventListener('click',(e)=>{if(e.target===overlay)closeOverlay(overlay.id)}));
   document.addEventListener('keydown',e=>{if(e.key==='Escape')all('.overlay.open').forEach(el=>closeOverlay(el.id))});
-  all('[data-go]').forEach(el=>el.onclick=()=>{closeOverlay('menuOverlay');if(el.dataset.go==='branch'){openBranch();return}if(el.dataset.go==='menuSection'){location.href='menu.html';return}if(el.dataset.go==='review-sec'){document.querySelector('.review-sec')?.scrollIntoView({behavior:'smooth'});return}scrollToId(el.dataset.go)});
+  all('[data-go]').forEach(el=>el.onclick=()=>{closeOverlay('menuOverlay');if(el.dataset.go==='branch'){openBranch();return}if(el.dataset.go==='menuSection'){location.href='official-menu.html';return}if(el.dataset.go==='review-sec'){document.querySelector('.review-sec')?.scrollIntoView({behavior:'smooth'});return}scrollToId(el.dataset.go)});
   try{const saved=localStorage.getItem('rayyan_branch');if(saved){selected=branches.find(b=>b.id===saved)||selected;currentCountry=selected.country}}catch(e){};updateBranch();setLang('en');
 </script>
 <script src="home-extras.js"></script><script src="rayyan-branches-data.js"></script><script src="branch-info.js"></script><script src="order-sync.js"></script></body>
