@@ -78,10 +78,22 @@ const assert=require("node:assert/strict");
  assert.equal(await page.locator("#adminArea").count(),0);
  console.log("PASS guest booking: pending, reference lookup, no admin dashboard");
  await page.goto(base+"index.html");
- const bookNav=page.locator("#navOrder");
- await bookNav.click();
+ await page.waitForSelector("#branchOverlay.open");
+ assert.equal(await page.locator(".rayyan-four-nav>a").count(),4);
+ assert.deepEqual(await page.locator(".rayyan-four-nav>a span").allTextContents(),["Home","Menu","Book Table","Order"]);
+ await page.keyboard.press("Escape");
+ assert.ok(await page.locator("#branchOverlay").evaluate(x=>x.classList.contains("open")));
+ await page.locator("#branchOverlay .branch-opt[data-branch=rigga]").click();
+ assert.ok(await page.locator("#branchOverlay").evaluate(x=>!x.classList.contains("open")));
+ assert.equal(await page.evaluate(()=>localStorage.getItem("rayyan_demo_branch")),"rigga");
+ await page.reload();
+ assert.ok(await page.locator("#branchOverlay").evaluate(x=>!x.classList.contains("open")));
+ assert.ok((await page.locator("#activeBranchTop").innerText()).includes("Rigga"));
+ console.log("PASS forced first-visit branch selector and persisted branch");
+ await page.locator('.rayyan-four-nav>a[href="book-table.html"]').click();
  await page.waitForURL(/book-table\.html/);
- console.log("PASS homepage bottom-nav booking");
+ assert.equal(await page.locator(".rayyan-four-nav>a").count(),4);
+ console.log("PASS evenly distributed four-tab navigation across pages");
  await page.goto(base+"branches.html");
  await page.waitForSelector(".reserve-branch");
  assert.equal(await page.locator(".reserve-branch").count(),6);
@@ -89,8 +101,9 @@ const assert=require("node:assert/strict");
  await page.waitForURL(/book-table\.html\?branch=/);
  console.log("PASS branch-specific reservation actions");
  await page.goto(base+"official-menu.html");
- assert.ok(await page.locator('a.rayyan-nav-book').count()===1);
- console.log("PASS menu permanent book-table navigation");
+ assert.equal(await page.locator(".rayyan-four-nav>a").count(),4);
+ console.log("PASS menu permanent booking and order navigation");
+
 
 
  assert.deepEqual(errors,[]);
