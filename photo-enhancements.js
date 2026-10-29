@@ -1,50 +1,52 @@
 
+/* Real local WebP photography, mapped from Rayyan's curated public photo package. */
 (()=>{
-if(!document.getElementById("extendedMenu")||typeof products==="undefined")return;
-// Public-domain CC0 photographs with source links. Representative photos; not photographs of Rayyan's own portions.
-const files={
-chicken:"Chicken Mandi Rice مندي دجاج.JPG",
-haneeth:"Chicken fry piece mandi.jpg",
-seafood:"Grilled fish.jpg",
-rice:"Chicken Mandi Rice during Cooking.JPG",
-salad:"Fattoush 1.JPG",
-dessert:"Sweet3.jpg"
-};
-const links=Object.fromEntries(Object.entries(files).map(([key,file])=>[key,"https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(file)+"?width=450"]));
-const original=products.mandi?.image||"";
-const mapping={
- mutton:original,
- chicken:links.chicken,
- haneeth:original,
- seafood:links.seafood,
- rice:links.rice,
- salad:links.salad,
- dessert:links.dessert
-};
-Object.keys(products).forEach(id=>{
- const p=products[id];
- if(id==="mandi"||id==="madbee")return; // Preserve Rayyan's actual menu illustrations.
- if(!p.group)return;
- if(mapping[p.group])p.image=mapping[p.group];
-});
-const area=document.getElementById("extendedMenu");
-function enhance(){
- area.querySelectorAll(".rayyan-menu-card").forEach(card=>{
-  const art=card.querySelector(".rayyan-menu-illustration");
-  if(!art||art.dataset.photoReady)return;
-  const p=products[card.dataset.id];if(!p||!p.image)return;
-  art.dataset.photoReady="yes";art.classList.add("photo");
-  art.replaceChildren();
-  const img=document.createElement("img");img.alt="Illustrative "+p.group+" food photograph";img.loading="lazy";img.decoding="async";img.src=p.image;
-  const backup=document.createElement("div");backup.className="photo-fallback";backup.textContent="✦";
-  img.onerror=()=>{img.style.display="none";backup.style.display="grid"};
-  art.append(img,backup);
- });
-}
-const caption=document.createElement("details");caption.className="rayyan-photo-credit";
-caption.innerHTML='<summary>Photography &amp; menu image information</summary><p>Featured mutton photos are from Rayyan’s supplied printed menu. Additional food photos are real, illustrative photographs from Wikimedia Commons (CC0); they do not depict Rayyan’s own photographed portions. Please replace them with approved restaurant photos before official launch.</p>'+
- Object.entries(files).map(([group,file])=>'<a href="https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(file)+'" target="_blank" rel="noopener">'+group+'</a>').join(" · ");
-area.insertAdjacentElement("afterend",caption);
-const observer=new MutationObserver(enhance);observer.observe(area,{childList:true,subtree:true});
-enhance();
+ if(!document.getElementById("extendedMenu") || typeof products==="undefined")return;
+ const map=window.RayyanPhotoMap||{};
+ const defaultArt=products.mandi&&products.mandi.image;
+ for(const [id,path] of Object.entries(map)){
+   if(products[id])products[id].image=path;
+ }
+ const area=document.getElementById("extendedMenu");
+ const imageFail=()=>{ /* Browser image onerror handles the visual fallback. */ };
+ function renderPhotos(){
+   area.querySelectorAll(".rayyan-menu-card").forEach(card=>{
+     const art=card.querySelector(".rayyan-menu-illustration");
+     if(!art)return;
+     const p=products[card.dataset.id];
+     if(!p)return;
+     const src=map[card.dataset.id];
+     if(!src){return;}
+     if(art.dataset.photoSrc===src)return;
+     art.dataset.photoSrc=src;
+     art.classList.add("photo");
+     art.replaceChildren();
+     const img=document.createElement("img");
+     img.alt="Illustrative food photograph: "+p.name;
+     img.loading="lazy";img.decoding="async";img.src=src;
+     const fallback=document.createElement("span");
+     fallback.className="photo-fallback";fallback.textContent="R";
+     img.onerror=()=>{img.style.display="none";fallback.style.display="grid"};
+     art.append(img,fallback);
+   });
+   document.querySelectorAll(".simple").forEach(card=>{
+     const id=card.dataset.id,src=map[id];
+     if(!src || card.querySelector(".rayyan-side-photo"))return;
+     const img=document.createElement("img");
+     img.src=src;img.alt="Representative photograph: "+products[id].name;
+     img.className="rayyan-side-photo";img.loading="lazy";img.decoding="async";
+     img.onerror=()=>img.remove();
+     card.prepend(img);
+   });
+ }
+ renderPhotos();
+ const obs=new MutationObserver(renderPhotos);
+ obs.observe(area,{childList:true,subtree:true});
+ const last=document.querySelector(".rayyan-photo-credit");
+ if(last)last.remove();
+ const notes=document.createElement("details");
+ notes.className="rayyan-photo-credit";
+ notes.innerHTML='<summary>About the food photographs &amp; credits</summary>'+
+ '<p>Rayyan’s original printed-menu featured dish photos remain. The additional images are real photographs of similar food from Wikimedia Commons, not official Rayyan product photos. Actual presentation may vary. Some photos are cropped and resized for the layout. Licensed images are credited in the downloadable package and <a href="data/photo-credits.csv" target="_blank" rel="noopener">source/credits register</a>.</p>';
+ area.insertAdjacentElement("afterend",notes);
 })();
