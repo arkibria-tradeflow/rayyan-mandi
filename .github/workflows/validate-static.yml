@@ -29,6 +29,12 @@ jobs:
           for filename in ['index.html','menu.html','branches.html','order.html','home-extras.css','home-extras.js','menu-extras.css','menu-extras.js','rayyan-branches-data.js','branch-info.css','branch-info.js','photo-enhancements.css','photo-enhancements.js','order-sync.js']:
               assert Path(filename).is_file(),filename
           assert 'home-extras.css' in home and 'home-extras.js' in home
+          assert Path('official-menu.html').exists() and Path('data/official-menu.json').exists()
+          import json
+          official=json.loads(Path('data/official-menu.json').read_text())
+          assert len(official['items'])==71
+          assert any(x['name']=='Chicken Mandi' and x['price']==29 for x in official['items'])
+          assert any(x['name']=='Haneeth Shoulder' and x['price']==89 for x in official['items'])
           assert 'menu-extras.css' in menu and 'menu-extras.js' in menu
           assert 'id="menuArea"' in menu and 'id="menuSection"' in home
           assert len(re.findall(r'^\s*\["',extra,re.M))==32, "Expected 32 additional menu items"
@@ -40,12 +46,16 @@ jobs:
                   assert ref in page,(filename,ref)
           assert 'photo-enhancements.js' in menu
           assert 'Review WhatsApp message' in Path('order.html').read_text()
-          assert 'Doha' in Path('rayyan-branches-data.js').read_text() or 'Al Wukair' in Path('rayyan-branches-data.js').read_text()
+          assert 'Al Mashaf' in Path('rayyan-branches-data.js').read_text()
           order=Path('order.html').read_text()
           import re
           inline=re.findall(r'<script>(.*?)</script>',order,re.S)
           assert inline, 'Expected inline checkout script'
           Path('/tmp/order-check.js').write_text(inline[-1])
-          print('PASS: HTML references, six branches, demo checkout, photos and 36-item catalog')
+          inline_official=re.findall(r'<script>(.*?)</script>',Path('official-menu.html').read_text(),re.S)
+          assert inline_official
+          Path('/tmp/official-check.js').write_text(inline_official[-1])
+          print('PASS: HTML references, six branches, PDF-sourced 71-item catalog, checkout and photos')
           PY
           node --check /tmp/order-check.js
+          node --check /tmp/official-check.js
