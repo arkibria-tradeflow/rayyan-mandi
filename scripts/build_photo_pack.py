@@ -9,7 +9,24 @@ OUT.mkdir(parents=True,exist_ok=True)
 SOURCE=json.loads((ROOT/"data/photo-sources.json").read_text(encoding="utf-8"))
 session=requests.Session()
 session.headers.update({"User-Agent":"RayyanMandi-Demo-Media/1.0 (Commons attribution image preparation, contact via GitHub issue)"})
-def download(name):
+def download(entry):
+    if entry.get("download_url"):
+        url=entry["download_url"]
+        last=None
+        for attempt in range(2):
+            try:
+                response=session.get(url,timeout=30)
+                response.raise_for_status()
+                if len(response.content)<5000:raise ValueError("Small image response")
+                with Image.open(io.BytesIO(response.content)) as im:im.verify()
+                return response.content
+            except Exception as exc:
+                last=exc
+                print("Retry licensed image",entry["slug"],str(exc)[:130],flush=True)
+                time.sleep(2+attempt)
+        raise RuntimeError(str(last))
+    name=entry["source"]
+
     filename=name.replace(" ","_")
     digest=hashlib.md5(filename.encode()).hexdigest()
     q=urllib.parse.quote(filename,safe="()")
@@ -43,7 +60,7 @@ def main():
     for entry in SOURCE:
         dest=OUT/(entry["slug"]+".webp")
         try:
-            webp(download(entry["source"]),dest);ok.append(entry)
+            webp(download(entry),dest);ok.append(entry)
             print("OK",dest.relative_to(ROOT),dest.stat().st_size,flush=True)
         except Exception as exc:
             fail.append((entry["slug"],str(exc)));dest.unlink(missing_ok=True)
