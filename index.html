@@ -114,5 +114,5 @@
   all('[data-go]').forEach(el=>el.onclick=()=>{closeOverlay('menuOverlay');if(el.dataset.go==='branch'){openBranch();return}if(el.dataset.go==='menuSection'){location.href='official-menu.html';return}if(el.dataset.go==='review-sec'){document.querySelector('.review-sec')?.scrollIntoView({behavior:'smooth'});return}scrollToId(el.dataset.go)});
   try{const saved=localStorage.getItem('rayyan_branch');if(saved){selected=branches.find(b=>b.id===saved)||selected;currentCountry=selected.country}}catch(e){};updateBranch();setLang('en');
 </script>
-<script src="home-extras.js"></script><script src="rayyan-branches-data.js"></script><script src="branch-info.js"></script><script src="order-sync.js"></script></body>
+<script src="home-extras.js"></script><script src="rayyan-branches-data.js"></script><script src="branch-info.js"></script><script src="order-sync.js"></script><a href="book-table.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 16px;margin:10px 18px;border-radius:12px;background:#3b281f;color:#f7e7d0;font-size:13px;font-weight:800;text-decoration:none">▦ &nbsp; Book a Table</a></body>
 </html>
