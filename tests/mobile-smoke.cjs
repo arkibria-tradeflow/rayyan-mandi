@@ -55,7 +55,7 @@ const assert=require("node:assert/strict");
  await page.locator("#search").fill("Chicken Mandi");
  assert.equal(await page.locator(".card").count(),1);
  await page.locator(".add").click();
- await page.locator("#order").click();
+ await page.locator('.rayyan-four-nav a[href="order.html"]').click();
  await page.waitForURL(/order\.html/);
  assert.ok((await page.locator("#items").innerText()).includes("Chicken Mandi"));
  console.log("PASS searchable ordering and basket transfer");
