@@ -17,6 +17,8 @@ jobs:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Mandi_chicken.jpg/500px-Mandi_chicken.jpg',
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Chicken_fry_piece_mandi.jpg/500px-Chicken_fry_piece_mandi.jpg',
           'https://commons.wikimedia.org/wiki/Special:FilePath/Mandi_chicken.jpg',
+          'https://images.pexels.com/photos/18698228/pexels-photo-18698228.jpeg?auto=compress%26cs=tinysrgb%26w=700',
+          'https://images.pexels.com/photos/29300022/pexels-photo-29300022.jpeg',
           'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=480'
           ]
           for url in urls:
