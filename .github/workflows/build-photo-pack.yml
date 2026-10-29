@@ -1,0 +1,41 @@
+name: Build Rayyan dish photo ZIP
+on:
+  push:
+    paths:
+      - 'scripts/build_photo_pack.py'
+      - 'data/photo-sources.json'
+      - '.github/workflows/build-photo-pack.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-photo-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install photo processing libraries
+        run: python -m pip install 'Pillow>=11,<13' requests
+      - name: Download real online photos and prepare WebP package
+        run: python scripts/build_photo_pack.py
+      - name: Upload downloadable image ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: Rayyan_Mandi_Dish_Photos
+          path: Rayyan_Mandi_Dish_Photos.zip
+          if-no-files-found: error
+      - name: Commit photos, credits, mapping and ready-to-upload ZIP
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/menu data/photo-credits.csv data/dish-image-mapping.csv data/photo-mapping.json rayyan-image-map.js Rayyan_Mandi_Dish_Photos.zip PHOTO_PACKAGE_README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Add local real-food photography with mapping, credits and reusable ZIP"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
